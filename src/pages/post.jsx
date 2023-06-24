@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Data } from "../data";
 import "../App.css";
@@ -9,15 +9,16 @@ import { BiCommentDetail } from "react-icons/bi";
 import { FiShare2 } from "react-icons/fi";
 import { BsBookmarkFill, BsBookmark } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
+import  { Update } from "../context";
 
 export default function Post() {
   const { ID } = useParams();
+  const { postdata } = useContext(Update);
   return (
     <div>
       <ul>
         {" "}
-        {Data.posts
-          .filter((item) => item.postId === ID)
+        {postdata.filter((item) => item.postId === ID)
           .map((post) => {
             return (
               <li type="none">

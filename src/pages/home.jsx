@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Data } from "../data";
+import React, { useContext } from "react";
 import "../App.css";
 import { BiSolidUpArrow } from "react-icons/bi";
 import { BiSolidDownArrow } from "react-icons/bi";
@@ -7,61 +6,11 @@ import { BiCommentDetail } from "react-icons/bi";
 import { FiShare2 } from "react-icons/fi";
 import { BsBookmarkFill, BsBookmark } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import  { Update } from "../context";
 export default function Home() {
   const navigate = useNavigate();
-  const [vote, setVote] = useState(0);
-  const [postdata, setPostdata] = useState(Data.posts);
-  const handleVote = (vote, id, operation) => {
-    if ((operation === true)) {
-      console.log(vote);
-      const add = vote + 1;
-      console.log(add);
-      const temp = postdata.reduce(
-        (acc, item) =>
-          item.postId === id
-            ? [...acc, { ...item, upvotes: add }]
-            : [...acc, { ...item }],
-        []
-      );
-      setPostdata(temp);
-    }
-    if (operation === false) {
-      const sub = vote - 1;
-      console.log("vote", vote - 1);
-      console.log(sub);
-      const temp = postdata.reduce(
-        (acc, item) =>
-          item.postId === id
-            ? [...acc, { ...item, upvotes: sub }]
-            : [...acc, { ...item }],
-        []
-      );
-      setPostdata(temp);
-    }
-  };
-  const bookmarkHandler = (Id) => {
-    const temp = postdata.reduce(
-      (acc, curr) =>
-        curr.postId === Id
-          ? [...acc, { ...curr, isBookmarked: !curr.isBookmarked }]
-          : [...acc, { ...curr }],
-      []
-    );
-    setPostdata(temp);
-  };
-  const latestHandler = () => {
-    const dates = postdata.map((item) => item.createdAt);
-    console.log(dates);
-    const temp = postdata.reduce(
-      (acc, curr) =>
-        curr.postId
-          ? [...acc, { ...curr, createdAt: Date(curr.createdAt) }]
-          : [...acc, { ...curr }],
-      []
-    );
-    const sorted = temp.sort((a, b) => a.createdAt - b.createdAt);
-    console.log(temp);
-  };
+  const { handleVote, bookmarkHandler, latestHandler, postdata } =
+    useContext(Update);
   return (
     <div className="container">
       <div className="sidenav">
@@ -70,7 +19,6 @@ export default function Home() {
           <li className="nav-links">Explore</li>
           <li className="nav-links">Bookmark</li>
           <li className="nav-links">profile</li>
-        
         </ul>
       </div>
       <div className="postarea">
