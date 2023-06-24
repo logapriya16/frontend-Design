@@ -1,38 +1,39 @@
+:root{
+  --primary-color:#4c1d95;
+}
 .App {
   text-align: center;
+  background-color: #d1d5db;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
+.sidenav{
+background-color: transparent;
 
-.App-link {
-  color: #61dafb;
 }
+.nav-links{
+  padding: 0.5rem;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.active{
+  font-weight: bold;
+  font-size: larger;
+}
+.post{
+  background-color: white;
+  padding: 0.7rem;
+  margin: 0.3rem;
+  display: flex;
+}
+.post-components{
+  padding: 0.5rem;
+  
+}
+.sorttype{
+  padding: 2rem;
+}
+.replying-to{
+  color: var(--primary-color);
+  display: inline;
 }
