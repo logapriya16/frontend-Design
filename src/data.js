@@ -40,7 +40,16 @@ export const Data = {
         downvotes: 0,
         tags: ['html', 'javascript', 'web development'],
         createdAt: '2023-06-24T12:54:00Z',
-        comments: [],
+        comments: [
+          {
+            commentId: '89898-856-87576',
+            username: 'ashwin4real',
+            picUrl: 'http://bit.ly/42Zm7tM',
+            likes: 0,
+            comment: 'Interested',
+            createdAt: '2023-06-24T12:01:00Z',
+          }
+        ],
         isBookmarked: false,
       },
     ],

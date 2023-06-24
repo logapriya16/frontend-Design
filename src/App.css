@@ -3,10 +3,16 @@
 }
 .App {
   text-align: center;
-  background-color: #d1d5db;
+ 
+}
+.brand{
+  text-align: left;
+  color: var(--primary-color);
+  padding-left: 3rem;
 }
 .container{
   display: flex;
+  background-color: #d1d5db;
 }
 .sidenav{
 background-color: transparent;
@@ -36,4 +42,17 @@ background-color: transparent;
 .replying-to{
   color: var(--primary-color);
   display: inline;
+}
+.uparrow{
+  color: var(--primary-color);
+}
+.username{
+  color: var(--primary-color);
+}
+.hash-tags{
+  color: var(--primary-color);
+  margin: 0.2rem;
+  padding: 0.2rem;
+  background-color:#ddd9e3;
+  border-radius: 3px;
 }

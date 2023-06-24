@@ -6,7 +6,7 @@ import Post from './pages/post';
 function App() {
   return (
     <div className="App">
-        <h1>Forum App</h1>
+        <h1 className='brand'>Forum App</h1>
       <Routes>
         <Route path='/' element={<Home/>}
         />

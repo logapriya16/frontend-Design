@@ -12,8 +12,10 @@ export default function Home() {
   const [vote, setVote] = useState(0);
   const [postdata, setPostdata] = useState(Data.posts);
   const handleVote = (vote, id, operation) => {
-    if ((operation = "add")) {
+    if ((operation === true)) {
+      console.log(vote);
       const add = vote + 1;
+      console.log(add);
       const temp = postdata.reduce(
         (acc, item) =>
           item.postId === id
@@ -23,12 +25,14 @@ export default function Home() {
       );
       setPostdata(temp);
     }
-    if (operation === "minus") {
-      const add = vote - 1;
+    if (operation === false) {
+      const sub = vote - 1;
+      console.log("vote", vote - 1);
+      console.log(sub);
       const temp = postdata.reduce(
         (acc, item) =>
           item.postId === id
-            ? [...acc, { ...item, upvotes: add }]
+            ? [...acc, { ...item, upvotes: sub }]
             : [...acc, { ...item }],
         []
       );
@@ -43,21 +47,21 @@ export default function Home() {
           : [...acc, { ...curr }],
       []
     );
-    setPostdata(temp)
+    setPostdata(temp);
   };
-  const latestHandler=()=>{
-    const dates =postdata.map((item)=>item.createdAt)
-    console.log(dates)
-    const temp=postdata.reduce(
-        (acc, curr) =>
-          curr.postId 
-            ? [...acc, { ...curr, createdAt: Date(curr.createdAt) }]
-            : [...acc, { ...curr }],
-        []
-      );
-      const sorted = temp.sort((a,b)=>a.createdAt-b.createdAt)
-    console.log(temp) 
-  }
+  const latestHandler = () => {
+    const dates = postdata.map((item) => item.createdAt);
+    console.log(dates);
+    const temp = postdata.reduce(
+      (acc, curr) =>
+        curr.postId
+          ? [...acc, { ...curr, createdAt: Date(curr.createdAt) }]
+          : [...acc, { ...curr }],
+      []
+    );
+    const sorted = temp.sort((a, b) => a.createdAt - b.createdAt);
+    console.log(temp);
+  };
   return (
     <div className="container">
       <div className="sidenav">
@@ -66,6 +70,7 @@ export default function Home() {
           <li className="nav-links">Explore</li>
           <li className="nav-links">Bookmark</li>
           <li className="nav-links">profile</li>
+        
         </ul>
       </div>
       <div className="postarea">
@@ -79,8 +84,9 @@ export default function Home() {
                     <p>
                       <BiSolidUpArrow
                         onClick={() => {
-                          handleVote(post.upvotes, post.postId, "add");
+                          handleVote(post.upvotes, post.postId, true);
                         }}
+                        className="uparrow"
                         style={{ cursor: "pointer" }}
                       />
                     </p>
@@ -88,7 +94,7 @@ export default function Home() {
                     <p>
                       <BiSolidDownArrow
                         onClick={() => {
-                          handleVote(post.upvotes, post.postId, "minus");
+                          handleVote(post.upvotes, post.postId, false);
                         }}
                         style={{ cursor: "pointer" }}
                       />
@@ -96,10 +102,14 @@ export default function Home() {
                   </div>
                   <div>
                     <li>
-                      <div>postedBy@{post.username}{post.createdAt}</div>
+                      <div>
+                        postedBy@
+                        <span className="username">{post.username}</span>
+                        {post.createdAt}
+                      </div>
                       <h3>{post.post}</h3>
                       {post.tags.map((tag) => (
-                        <span>#{tag}</span>
+                        <span className="hash-tags">#{tag}</span>
                       ))}
                       <div>{post.postDescription}</div>
                     </li>
@@ -107,14 +117,15 @@ export default function Home() {
                 </div>
                 <div>
                   <hr />
-                  <BiCommentDetail className="post-components" 
-                    onClick={() => navigate(`/post/${post.postId}`)} />
-                  <FiShare2
+                  <BiCommentDetail
                     className="post-components"
+                    onClick={() => navigate(`/post/${post.postId}`)}
                   />
+                  <FiShare2 className="post-components" />
                   {post.isBookmarked ? (
-                    <BsBookmarkFill className="post-components"
-                    onClick={() => bookmarkHandler(post.postId)}
+                    <BsBookmarkFill
+                      className="post-components"
+                      onClick={() => bookmarkHandler(post.postId)}
                     />
                   ) : (
                     <BsBookmark
@@ -130,7 +141,9 @@ export default function Home() {
       </div>
       <div className="sorttype">
         <h3>Sort By</h3>
-        <div onClick={()=>latestHandler()}>Latest Post <BiSolidDownArrow/></div>
+        <div onClick={() => latestHandler()}>
+          Latest Post <BiSolidDownArrow />
+        </div>
       </div>
     </div>
   );
